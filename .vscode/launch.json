@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/wongxian/Documents/Learn_Linux/Ch2.File_IO_System",
-      "program": "/home/wongxian/Documents/Learn_Linux/Ch2.File_IO_System/build/Debug/outDebug",
+      "cwd": "/home/wongxian/Documents/Learn_Linux/Ch3.File_IO_Deep",
+      "program": "/home/wongxian/Documents/Learn_Linux/Ch3.File_IO_Deep/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

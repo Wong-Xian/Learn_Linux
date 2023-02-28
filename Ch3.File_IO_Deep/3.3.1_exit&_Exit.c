@@ -17,3 +17,8 @@ int main(void)
     close(fd);
     _exit(0);
 }
+
+/*
+both _exit() & _Exit() are system call.
+but exit() is a C function.
+*/

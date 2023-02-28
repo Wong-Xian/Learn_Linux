@@ -15,7 +15,7 @@ int main(void)
 
  /* 打开文件 */
     fd = open("./hole_file",
-                O_WRONLY | O_CREAT | O_EXCL,
+                O_RDWR | O_CREAT | O_EXCL,
                 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (-1 == fd)
     {
@@ -45,6 +45,30 @@ int main(void)
         }
     }
     ret = 0;
+
+    // now read the 1st KB data and see what it would be like.
+
+    // set the read point to 0.
+    ret = lseek(fd, 0, SEEK_SET);
+    if (-1 == ret)
+    {
+        perror("lseek error");
+        goto err;
+    }
+
+    // read 1024Bytes
+    ret = read (fd, buffer, sizeof(buffer));
+    if (ret==-1)
+    {
+        perror("read error");
+        goto err;
+    }
+    else
+    {
+        printf("%ld characters were read.\n", sizeof(buffer));
+        printf("%s\n", buffer);
+    }
+
 err:
  /* 关闭文件 */
     close(fd);

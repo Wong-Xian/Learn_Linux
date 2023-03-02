@@ -22,7 +22,7 @@ int main(void)
 
 
     /* 使用 fcntl 函数复制一个文件描述符 */
-    fd2 = fcntl(fd1, F_DUPFD, 0);
+    fd2 = fcntl(fd1, F_DUPFD, 0);   // the returned fd2 will be >= 0(the 3rd arg).
     if (-1 == fd2)
     {
         perror("fcntl error");

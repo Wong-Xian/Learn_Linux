@@ -150,6 +150,30 @@ char *strncat(char *dest, const char *src, size_t n);
 
 ## 6.4 字符串拷贝
 
+C 语言函数库中提供了 strcpy()函数和 strncpy()函数用于实现字符串拷贝，strcpy 函数原型如下所示：
+
+### 1、strcpy函数
+
+``` c
+#include <string.h>
+char *strcpy(char *dest, const char *src);
+```
+
+作用：把src指向的字符串复制到dest指向的字符串。必须保证 dest 指向的内存空间足够大，能够容纳下 src 字符串，否则会导致溢出错误。
+
+若dest中原本有数据，无论原本数据比src长或短，都会被src覆盖。
+
+### 2、strncpy函数
+
+strncpy()与 strcpy()的区别在于，strncpy()可以指定从源字符串 src 复制到目标字符串 dest 的字符数量，strncpy 函数原型如下所示：
+
+``` c
+#include <string.h>
+char *strncpy(char *dest, const char *src, size_t n);
+```
+
+只将src的前n个字符替换掉dest的前n个字符，不覆盖dest其他的字符。
+
 ## 6.5 内存填充
 
 ## 6.6 字符串比较

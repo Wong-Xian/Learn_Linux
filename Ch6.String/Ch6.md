@@ -120,6 +120,34 @@ size_t strlen(const char *s);
 
 ## 6.3 字符串拼接
 
+C 语言函数库中提供了 strcat()函数或 strncat()函数用于将两个字符串连接（拼接）起来，strcat 函数原型如下所示：
+
+### 1、strcat()
+
+``` c
+#include <string.h>
+char *strcat(char *dest, const char *src);
+```
+
+<b>dest：</b>目标字符串。
+
+<b>src：</b>源字符串。
+
+<b>返回值：</b>返回指向目标字符串 dest 的指针。
+
+strcat()函数会把 src 所指向的字符串追加到 dest 所指向的字符串末尾，所以必须要保证 dest 有足够的存储空间来容纳两个字符串，否则会导致溢出错误；dest 末尾的'\0'结束字符会被覆盖，src 末尾的结束字符'\0'会一起被复制过去，最终的字符串只有一个'\0'。
+
+### 2、strncat()
+
+strncat()与 strcat()的区别在于，strncat 可以指定源字符串追加到目标字符串的字符数量，strncat 函数原型如下所示：
+
+``` c
+#include <string.h>
+char *strncat(char *dest, const char *src, size_t n);
+```
+
+<b>n：</b>要追加的最大字符数。
+
 ## 6.4 字符串拷贝
 
 ## 6.5 内存填充

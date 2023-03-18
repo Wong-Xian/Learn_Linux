@@ -227,8 +227,20 @@ int strncmp(const char *s1, const char *s2, size_t n);
 
 <b>n：</b>最多比较前 n 个字符。
 
-
 ## 6.7 字符串查找
+
+### 1、strchr函数
+
+### 2、strrchr函数
+
+### 3、strstr函数
+
+函数原型
+
+``` c
+#include <string.h>
+char *strchr(const char *s, int c);
+```
 
 ## 6.8 字符串与数字互转
 

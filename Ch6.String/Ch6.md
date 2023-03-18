@@ -200,6 +200,34 @@ void bzero(void *s, size_t n);
 
 ## 6.6 字符串比较
 
+### 1、strcmp
+
+函数原型：
+
+``` c
+#include <string.h>
+int strcmp(const char *s1, const char *s2);
+```
+
+返回值：
+- 如果返回值小于 0，则表示 str1 小于 str2
+- 如果返回值大于 0，则表示 str1 大于 str2
+- 如果返回值等于 0，则表示字符串 str1 等于字符串 str2
+
+根据ASCII码值依次比较 str1 和 str2 的每一个字符，直到出现了不同的字符，或者某一字符串已经到达末尾。
+
+### 2、strncmp
+
+函数原型：
+
+``` c
+#include <string.h>
+int strncmp(const char *s1, const char *s2, size_t n);
+```
+
+<b>n：</b>最多比较前 n 个字符。
+
+
 ## 6.7 字符串查找
 
 ## 6.8 字符串与数字互转

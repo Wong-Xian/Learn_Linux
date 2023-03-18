@@ -176,6 +176,28 @@ char *strncpy(char *dest, const char *src, size_t n);
 
 ## 6.5 内存填充
 
+将某一块内存的数据全部设置为指定的值（初始化时通常设置为0）
+
+### 1、memset函数
+
+函数原型：
+
+``` c
+#include <string.h>
+void *memset(void *s, int c, size_t n);
+```
+
+### 2、bzero函数
+
+将一段内存空间中的数据全部设置为 0
+
+函数原型：
+
+``` c
+#include <strings.h>
+void bzero(void *s, size_t n);
+```
+
 ## 6.6 字符串比较
 
 ## 6.7 字符串查找

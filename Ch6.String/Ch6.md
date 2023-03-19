@@ -231,18 +231,28 @@ int strncmp(const char *s1, const char *s2, size_t n);
 
 ### 1、strchr函数
 
-### 2、strrchr函数
-
-### 3、strstr函数
-
-函数原型
+函数原型：
 
 ``` c
 #include <string.h>
 char *strchr(const char *s, int c);
 ```
 
+### 2、strrchr函数
+
+与上一个函数的不同，是从后往前查找字符。
+
+### 3、strstr函数
+
+在字符串中找“子字符串”第一次出现的位置。
+
 ## 6.8 字符串与数字互转
+
+### 6.8.1 字符串->整型数据
+
+### 6.8.2 字符串->浮点型数据
+
+### 6.8.3 数字->字符串
 
 ## 6.9 给应用程序传参
 

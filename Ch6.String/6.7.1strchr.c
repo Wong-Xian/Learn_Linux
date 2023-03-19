@@ -13,6 +13,10 @@ int main(void)
         printf("Character: %c\n", *ptr);
         printf("Offset: %ld\n", ptr - str);
     }
+    else
+    {
+        printf("No such character!\n");
+    }
 
     exit(0);
 }

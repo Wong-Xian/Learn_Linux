@@ -250,6 +250,37 @@ char *strchr(const char *s, int c);
 
 ### 6.8.1 字符串->整型数据
 
+#### atoi、atol、atoll 函数
+
+函数原型：
+
+``` c
+// 作用：将字符串形式的数字，转换成整型等数据类型的数字。
+#include <stdlib.h>
+
+int atoi(const char *nptr);         // 字符串转换成int
+long atol(const char *nptr);        // 字符串转换成long
+long long atoll(const char *nptr);  // 字符串转换成long long
+```
+
+#### strtol、strtoll 函数
+
+strtol()、strtoll()可以实现将多种不同进制数（譬如二进制表示的数字字符串、八进制表示的数字字符串、十六进制表示的数数字符串）表示的字符串转换为整形数据。函数原型：
+
+``` c
+#include <stdlib.h>
+long int strtol(const char *nptr, char **endptr, int base);
+long long int strtoll(const char *nptr, char **endptr, int base);
+```
+
+<b>endptr：</b>char **类型的指针
+
+- 不为NULL时：函数将字符串中第一个无效字符的地址存储在* endptr 中。如果根本没有数字，函数会将 nptr 的原始值存储在* endptr 中（并返回 0）。
+
+- 为NULL时：表示不接收相应信息。
+
+<b>base：</b>数字基数，数字进制数。介于2到36之间。（z代表35）在 base=0 的情况下，如果字符串包含一个了“0x”前缀，表示该数字将以 16 为基数；如果包含的是“0”前缀，表示该数字将以 8 为基数。
+
 ### 6.8.2 字符串->浮点型数据
 
 ### 6.8.3 数字->字符串

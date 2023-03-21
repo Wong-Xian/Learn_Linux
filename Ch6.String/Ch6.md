@@ -273,7 +273,7 @@ long int strtol(const char *nptr, char **endptr, int base);
 long long int strtoll(const char *nptr, char **endptr, int base);
 ```
 
-<b>endptr：</b>char **类型的指针
+<b>endptr：</b>char **类型的指针。<font color=red>由于char类型数组，其变量名本身就是一个指针，所以“*变量名”相当于char的二级指针。</font>
 
 - 不为NULL时：函数将字符串中第一个无效字符的地址存储在* endptr 中。如果根本没有数字，函数会将 nptr 的原始值存储在* endptr 中（并返回 0）。
 

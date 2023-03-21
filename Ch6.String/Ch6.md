@@ -281,7 +281,39 @@ long long int strtoll(const char *nptr, char **endptr, int base);
 
 <b>base：</b>数字基数，数字进制数。介于2到36之间。（z代表35）在 base=0 的情况下，如果字符串包含一个了“0x”前缀，表示该数字将以 16 为基数；如果包含的是“0”前缀，表示该数字将以 8 为基数。
 
+#### strtoul、strtoull 函数
+
+strtoul()返回值类型是 unsigned long int，strtoull()返回值类型是 unsigned long long int，函数原型如下所示：
+
+``` c
+#include <stdlib.h>
+unsigned long int strtoul(const char *nptr, char **endptr, int base);
+unsigned long long int strtoull(const char *nptr, char **endptr, int base);
+```
+
 ### 6.8.2 字符串->浮点型数据
+
+C 函数库中用于字符串转浮点型数据的函数有 atof()、strtod()、strtof()、strtold()。
+
+#### atof 函数
+
+将字符串转换为一个 double 类型的浮点数据
+
+``` c
+#include <stdlib.h>
+double atof(const char *nptr);
+```
+
+#### strtod、strtof、strtold 函数
+
+strtof()、strtod()以及 strtold()三个库函数可分别将字符串转换为 float 类型数据、double 类型数据、long double 类型数据，函数原型如下所示：
+
+``` c
+#include <stdlib.h>
+double strtod(const char *nptr, char **endptr);
+float strtof(const char *nptr, char **endptr);
+long double strtold(const char *nptr, char **endptr);
+```
 
 ### 6.8.3 数字->字符串
 

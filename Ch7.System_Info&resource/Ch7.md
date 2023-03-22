@@ -407,4 +407,23 @@ calloc()在堆中动态地分配 nmemb 个长度为 size 的连续空间，并�
 
 ### 7.6.3 分配对齐内存
 
+``` c
+#include <stdlib.h>
+int posix_memalign(void **memptr, size_t alignment, size_t size);
+void *aligned_alloc(size_t alignment, size_t size);
+void *valloc(size_t size);
+
+#include <malloc.h>
+void *memalign(size_t alignment, size_t size);
+void *pvalloc(size_t size);
+```
+
+posix_memalign()函数用于在堆上分配 size 个字节大小的对齐内存空间。
+
+aligned_alloc()函数用于分配 size 个字节大小的内存空间，返回指向该空间的指针。
+
+（过时，不提倡使用）memalign()与 aligned_alloc()参数是一样的，它们之间的区别在于：对于参数 size 必须是参数 alignment的整数倍这个限制条件，memalign()并没有这个限制条件。
+
+（过时，不提倡使用）valloc()分配 size 个字节大小的内存空间。函数内部实现中，使用了页大小作为对齐的长度。
+
 ## 7.7 proc文件系统

@@ -368,4 +368,32 @@ int nanosleep(const struct timespec *req, struct timespec *rem);
 
 ## 7.6 申请堆内存
 
+### 7.6.1 在堆上分配内存 malloc和free
+
+malloc函数原型：
+
+``` c
+#include <stdlib.h>
+void *malloc(size_t size);
+```
+
+size：需要分配的内存大小，以字节为单位。
+
+void* 表示返回值指向的类型未定，常需要做强制类型转换。
+
+需要对malloc分配的堆内存进行初始化操作，再使用。
+
+用完内存后需要手动释放，用free函数，函数原型：
+
+``` c
+#include <stdlib.h>
+void free(void *ptr);
+```
+
+ptr：指向需要被释放的堆内存对应的指针。
+
+### 7.6.2 在堆上分配内存的其他方法
+
+### 7.6.3 分配对齐内存
+
 ## 7.7 proc文件系统

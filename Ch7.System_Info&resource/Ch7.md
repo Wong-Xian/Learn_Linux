@@ -303,7 +303,68 @@ clock_t clock(void);
 
 ## 7.4 产生随机数
 
+学习生成随机数
+
+有 随机数 & 伪随机数 之分
+
+### 1、rand函数
+
+``` c
+#include <stdlib.h>
+int rand(void);
+```
+
+问题：就是每一次运行程序所得到的随机数序列都是相同的。解决方法：可通过 srand()设置随机数种子。
+
+### 2、srand函数
+
+``` c
+#include <stdlib.h>
+void srand(unsigned int seed);
+```
+
+常用方法：srand(time(NULL));
+
 ## 7.5 休眠
+
+有时需要将进程暂停或休眠一段时间，进入休眠状态之后，程序将暂停运行，直到休眠结束。常用的系统调用和 C 库函数有 sleep()、usleep()以及 nanosleep()，这些函数在应用程序当中通常作为延时使用，譬如延时 1 秒钟，本小节将一一介绍。
+
+### 7.5.1 秒级休眠sleep
+
+<b>C库函数</b>
+
+函数原型：
+
+``` c
+#include <unistd.h>
+unsigned int sleep(unsigned int seconds);
+```
+
+### 7.5.2 微秒级休眠usleep
+
+<b>C库函数</b>
+
+函数原型：
+
+``` c
+#include <unistd.h>
+int usleep(useconds_t usec);
+```
+
+<b>usec：</b>休眠时长，以微秒为单位。
+
+成功返回0，错误返回-1，并设置 errno。
+
+### 7.5.3 高精度休眠nanosleep
+
+<b>Linux系统调用</b>
+
+nanosleep()具有更高精度来设置休眠时间长度，支持纳秒级时长设置。
+
+``` c
+#include <time.h>
+int nanosleep(const struct timespec *req, struct timespec *rem);
+```
 
 ## 7.6 申请堆内存
 

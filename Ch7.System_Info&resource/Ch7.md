@@ -127,6 +127,89 @@ Linux 系统在开机启动之后首先会读取 RTC 硬件获取实时时钟作
 
 #### jiffies 的引入
 
+jiffies 是内核中定义的一个全局变量。内核使用 jiffies 来记录系统从启动以来的系统节拍数。
+
+节拍率越高，每一个节拍时间越短，记录的时间精度越高。高节拍率会导致系统中断的产生更加频繁，频繁的中断会加剧系统的负担。
+
+### 7.2.3 获取时间time/gettimeofday
+
+#### 1、time
+
+系统调用 time()用于获取当前时间，以秒为单位，返回得到的值是自 1970-01-01 00:00:00 +0000 (UTC)以来的秒数，其函数原型如下所示：
+
+``` c
+#include <time.h>
+time_t time(time_t *tloc);
+```
+
+如果 tloc 参数不是 NULL，则返回值存储在 tloc 指向的内存中。
+
+成功则返回自 1970-01-01 00:00:00 +0000 (UTC)以来的时间值（以秒为单位）；失败则返回-1，并会设置 errno。
+
+#### 2、gettimeofday
+
+time()获取到的时间只能精确到秒，如果想要获取更加精确的时间可以使用系统调用 gettimeofday 来实现，gettimeofday()函数提供微秒级时间精度，函数原型如下所示:
+
+``` c 
+#include <sys/time.h>
+int gettimeofday(struct timeval *tv, struct timezone *tz);
+```
+
+### 7.2.4 时间转换函数
+
+把上一节中的函数获取到的时间值转换成方便人来查看的形式。
+
+#### 1、ctime函数
+
+<b>C 库函数</b>
+
+可以将日历时间转换为可打印输出的字符串形式。
+
+函数原型：
+
+``` c
+#include <time.h>
+char* ctime(const time_t *timep);
+char* ctime_r(const time_t *timep, char *buf);
+```
+
+#### 2、localtime函数
+
+localtime()函数可以把 time()或 gettimeofday()得到的秒数（time_t 时间或日历时间）变成一个 struct tm结构体所表示的时间，该时间对应的是本地时间。
+
+函数原型：
+
+``` c
+#include <time.h>
+struct tm *localtime(const time_t *timep);
+struct tm *localtime_r(const time_t *timep, struct tm *result);
+
+struct tm
+{
+    int tm_sec; /* 秒(0-60) */
+    int tm_min; /* 分(0-59) */
+    int tm_hour; /* 时(0-23) */
+    int tm_mday; /* 日(1-31) */
+    int tm_mon; /* 月(0-11) */
+    int tm_year; /* 年(这个值表示的是自 1900 年到现在经过的年数) */
+    int tm_wday; /* 星期(0-6, 星期日 Sunday = 0、星期一=1…) */
+    int tm_yday; /* 一年里的第几天(0-365, 1 Jan = 0) */
+    int tm_isdst; /* 夏令时 */
+};
+```
+
+#### 3、gmtime函数
+
+#### 4、mktime函数
+
+#### 5、asctime函数
+
+#### 6、strftime函数
+
+### 7.2.5 设置时间 settimeofday
+
+### 7.2.6 总结
+
 ## 7.3 进程时间
 
 ## 7.4 产生随机数

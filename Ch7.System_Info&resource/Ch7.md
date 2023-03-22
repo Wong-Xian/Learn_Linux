@@ -252,9 +252,54 @@ max：字符串的最大字节数。
 
 ### 7.2.5 设置时间 settimeofday
 
-### 7.2.6 总结
+<b>系统调用</b>
+
+设置系统的本地时间
+
+函数原型：
+
+``` c
+#include <sys/time.h>
+int settimeofday(const struct timeval *tv, const struct timezone *tz);
+```
+
+tz应设置为NULL
+
 
 ## 7.3 进程时间
+
+进程时间指的是进程从创建后（也就是程序运行后）到目前为止这段时间内使用 CPU 资源的时间总数。由两部分组成
+
+- 用户 CPU 时间：进程在用户空间（用户态）下运行所花费的 CPU 时间。有时也称为虚拟时间（virtual time）。
+- 系统 CPU 时间：进程在内核空间（内核态）下运行所花费的 CPU 时间。这是内核执行系统调用或代表进程执行的其它任务（譬如，服务页错误）所花费的时间。
+
+一般来说，进程时间指的是用户 CPU 时间和系统 CPU 时间的总和，也就是总的 CPU 时间。
+
+### 7.3.1 times函数
+
+times()函数用于获取当前进程时间，其函数原型如下所示：
+
+``` c
+#include <sys/times.h>
+clock_t times(struct tms *buf);
+
+struct tms
+{
+    clock_t tms_utime; /* user time, 进程的用户 CPU 时间, tms_utime 个系统节拍数 */
+    clock_t tms_stime; /* system time, 进程的系统 CPU 时间, tms_stime 个系统节拍数 */
+    clock_t tms_cutime; /* user time of children, 已死掉子进程的 tms_utime + tms_cutime 时间总和 */
+    clock_t tms_cstime; /* system time of children, 已死掉子进程的 tms_stime + tms_cstime 时间总和 */
+};
+```
+
+### 7.3.2 clock函数
+
+库函数 clock()提供了一个更为简单的方式用于获取进程时间，它的返回值描述了进程使用的总的 CPU 时间（也就是进程时间，包括用户 CPU 时间和系统 CPU 时间），其函数原型如下所示：
+
+``` c
+#include <time.h>
+clock_t clock(void);
+```
 
 ## 7.4 产生随机数
 

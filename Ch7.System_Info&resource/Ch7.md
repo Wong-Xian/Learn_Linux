@@ -175,6 +175,8 @@ char* ctime_r(const time_t *timep, char *buf);
 
 #### 2、localtime函数
 
+<b>C 库函数</b>
+
 localtime()函数可以把 time()或 gettimeofday()得到的秒数（time_t 时间或日历时间）变成一个 struct tm结构体所表示的时间，该时间对应的是本地时间。
 
 函数原型：
@@ -200,11 +202,53 @@ struct tm
 
 #### 3、gmtime函数
 
+<b>C 库函数</b>
+
+gmtime()函数也可以把 time_t 时间变成一个 struct tm 结构体所表示的时间，与 localtime()所不同的是，<b>gmtime()函数所得到的是 UTC 国际标准时间，</b>并不是计算机的本地时间，这是它们之间的唯一区别。
+
+``` c
+#include <time.h>
+struct tm *gmtime(const time_t *timep);
+struct tm *gmtime_r(const time_t *timep, struct tm *result);
+```
+
 #### 4、mktime函数
+
+<b>C 库函数</b>
+
+mktime()函数与 localtime()函数相反，mktime()可以将使用 struct tm 结构体表示的分解时间转换为 time_t时间（日历时间）。
+
+函数原型：
+
+``` c
+#include <time.h>
+time_t mktime(struct tm *tm);
+```
+
+成功返回转换得到 time_t 时间值；失败返回-1。
 
 #### 5、asctime函数
 
+<b>C 库函数</b>
+
+asctime()函数与 ctime()函数的作用一样，也可将时间转换为可打印输出的字符串形式，与 ctime()函数的区别在于，ctime()是将 time_t 时间转换为固定格式字符串、而 asctime()则是将 struct tm 表示的分解时间转换为固定格式的字符串。
+
 #### 6、strftime函数
+
+<b>C 库函数</b>
+
+此函数也可以将一个 struct tm 变量表示的分解时间转换为为格式化字符串，并且在功能上比 asctime()和 ctime()更加强大，它可以根据自己的喜好自定义时间的显示格式。
+
+函数原型：
+
+``` c
+#include <time.h>
+size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
+```
+
+s：指向一个缓存区的指针，该缓冲区用于存放生成的字符串。
+
+max：字符串的最大字节数。
 
 ### 7.2.5 设置时间 settimeofday
 

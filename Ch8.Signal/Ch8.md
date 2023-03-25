@@ -160,6 +160,17 @@ sighandler_t signal(int signum, sighandler_t handler);
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
 
+``` c
+struct sigaction
+{
+    void (*sa_handler)(int);
+    void (*sa_sigaction)(int, siginfo_t *, void *);
+    sigset_t sa_mask;
+    int sa_flags;
+    void (*sa_restorer)(void);
+};
+```
+
 ## 8.5 向进程发送信号
 
 ## 8.6 alarm() 和 pause() 函数

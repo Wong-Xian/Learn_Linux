@@ -155,10 +155,20 @@ sighandler_t signal(int signum, sighandler_t handler);
 
 更复杂，同时更具灵活性及移植性。
 
+函数原型：
+
 ``` c
 #include <signal.h>
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
+
+<b>signum：</b>需要设置的信号。
+
+<b>act：</b>指向sigaction结构体的指针。该参数不为NULL时，表示需要设置新的信号处理方式；为NULL时，表示无需修改该信号的处理方式。
+
+<b>oldact：</b>指向sigaction结构体的指针。不为NULL时，将信号原本的处理方式通过该指针返回出来；为NULL时，不返回。
+
+<b>返回值：</b>成功返回 0；失败将返回-1，并设置 errno。
 
 ``` c
 struct sigaction
@@ -171,7 +181,54 @@ struct sigaction
 };
 ```
 
+<b>sa_handler：</b>指向信号处理函数的指针。
+
+<b>sa_sigaction：</b>指向信号处理函数的指针。是一个替代的信号处理函数。sa_handler 和 sa_sigaction 是互斥的，不能同时设置。
+
+<b>sa_flags：</b>控制信号处理过程的标志。可设置为：
+
+- SA_NOCLDSTOP：如果signum为SIGCHLD，则子进程停止时或恢复时不会收到 SIGCHLD 信号。
+- SA_NOCLDWAIT：如果 signum 是 SIGCHLD，则在子进程终止时不要将其转变为僵尸进程。
+- SA_NODEFER：不要阻塞从某个信号自身的信号处理函数中接收此信号。
+- SA_RESETHAND：执行完信号处理函数之后，将信号的处理方式设置为系统默认操作。
+- SA_RESTART：被信号中断的系统调用，在信号处理完成之后将自动重新发起。
+- SA_SIGINFO：如果设置了该标志，则表示使用 sa_sigaction 作为信号处理函数、而不是 sa_handler
+
+siginfo_t 结构体：
+``` c
+siginfo_t
+{
+    int si_signo;       /* Signal number */
+    int si_errno;       /* An errno value */
+    int si_code;        /* Signal code */
+    int si_trapno;      /* Trap number that caused hardware-generated signal(unused on most architectures) */
+    pid_t si_pid;       /* Sending process ID */
+    uid_t si_uid;       /* Real user ID of sending process */
+    int si_status;      /* Exit value or signal */
+    clock_t si_utime;   /* User time consumed */
+    clock_t si_stime;   /* System time consumed */
+    sigval_t si_value;  /* Signal value */
+    int si_int;         /* POSIX.1b signal */
+    void *si_ptr;       /* POSIX.1b signal */
+    int si_overrun;     /* Timer overrun count; POSIX.1b timers */
+    int si_timerid;     /* Timer ID; POSIX.1b timers */
+    void *si_addr;      /* Memory location which caused fault */
+    long si_band;       /* Band event (was int in glibc 2.3.2 and earlier) */
+    int si_fd;          /* File descriptor */
+    short si_addr_lsb;  /* Least significant bit of address(since Linux 2.6.32) */
+    void *si_call_addr; /* Address of system call instruction(since Linux 3.5) */
+    int si_syscall;     /* Number of attempted system call(since Linux 3.5) */
+    unsigned int si_arch; /* Architecture of attempted system call(since Linux 3.5) */
+}
+```
+
 ## 8.5 向进程发送信号
+
+本节介绍<b>系统调用</b>kill和raise函数。
+
+### 8.5.1 kill函数
+
+### 8.5.2 raise函数
 
 ## 8.6 alarm() 和 pause() 函数
 

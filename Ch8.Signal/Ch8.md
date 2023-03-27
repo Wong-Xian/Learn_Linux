@@ -306,6 +306,35 @@ int sigismember(const sigset_t *set, int signum);
 
 ## 8.8 获取信号的描述信息
 
+``` c
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+    printf("SIGINT 描述信息: %s\n", sys_siglist[SIGINT]);
+    printf("SIGQUIT 描述信息: %s\n", sys_siglist[SIGQUIT]);
+    printf("SIGBUS 描述信息: %s\n", sys_siglist[SIGBUS]);
+    exit(0);
+}
+```
+
+### 8.8.1 strsignal()函数
+
+<b>C库函数</b>
+
+``` c
+#include <string.h>
+char *strsignal(int sig);
+```
+
+### 8.8.2 psignal()函数
+
+``` c
+#include <signal.h>
+void psignal(int sig, const char *s);
+```
+
 ## 8.9 信号掩码（阻塞信号传递）
 
 ## 8.10 阻塞等待信号sigsuspend()

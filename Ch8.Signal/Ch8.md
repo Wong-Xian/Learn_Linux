@@ -269,6 +269,41 @@ int pause(void);
 
 ## 8.7 信号集
 
+很多系统调用都使用到了信号集这种<u>数据类型</u>来作为参数传递。信号集其实就是 sigset_t 类型数据结构。
+
+``` c
+# define _SIGSET_NWORDS (1024 / (8 * sizeof (unsigned long int)))
+typedef struct
+{
+    unsigned long int __val[_SIGSET_NWORDS];
+} sigset_t;
+```
+
+### 8.7.1 初始化信号集
+
+``` c
+#include <signal.h>
+int sigemptyset(sigset_t *set); // 初始化空信号集
+int sigfillset(sigset_t *set);  // 初始化包含所有信号的信号集
+```
+
+<b>set：</b>指向需要进行初始化的信号集变量。
+
+### 8.7.2 向信号集中 添加/删除 信号
+
+``` c
+#include <signal.h>
+int sigaddset(sigset_t *set, int signum);   // 添加信号
+int sigdelset(sigset_t *set, int signum);   // 删除信号
+```
+
+### 8.7.3 测试信号是否在信号集中
+
+``` c
+#include <signal.h>
+int sigismember(const sigset_t *set, int signum);
+```
+
 ## 8.8 获取信号的描述信息
 
 ## 8.9 信号掩码（阻塞信号传递）

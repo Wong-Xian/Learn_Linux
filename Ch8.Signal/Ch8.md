@@ -224,11 +224,26 @@ siginfo_t
 
 ## 8.5 向进程发送信号
 
-本节介绍<b>系统调用</b>kill和raise函数。
+本节介绍<b>系统调用</b>kill和<b>C库函数</b>raise函数。
 
 ### 8.5.1 kill函数
 
+kill()系统调用可将信号发送给指定的进程或进程组中的每一个进程，其函数原型如下所示：
+
+``` c
+#include <sys/types.h>
+#include <signal.h>
+int kill(pid_t pid, int sig);
+```
+
 ### 8.5.2 raise函数
+
+有时进程需要向自身发送信号，<b>C库函数</b>raise()函数可用于实现这一要求，raise()函数原型如下所示：
+
+``` c
+#include <signal.h>
+int raise(int sig);
+```
 
 ## 8.6 alarm() 和 pause() 函数
 

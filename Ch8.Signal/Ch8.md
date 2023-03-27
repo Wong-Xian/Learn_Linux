@@ -337,6 +337,15 @@ void psignal(int sig, const char *s);
 
 ## 8.9 信号掩码（阻塞信号传递）
 
+阻塞不代表忽略这个信号，而是等到“不阻塞”之后再处理这个信号。
+
+一下函数可以设置当前进程的信号掩码（要阻塞信号的集合）。是<b>系统调用</b>
+
+``` c
+#include <signal.h>
+int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+```
+
 ## 8.10 阻塞等待信号sigsuspend()
 
 ## 8.11 实时信号

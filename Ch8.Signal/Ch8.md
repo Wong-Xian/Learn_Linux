@@ -247,6 +247,19 @@ int raise(int sig);
 
 ## 8.6 alarm() 和 pause() 函数
 
+<b>系统调用</b>
+
+### 8.6.1 alarm()
+
+函数原型：
+
+``` c
+#include <unistd.h>
+unsigned int alarm(unsigned int seconds);
+```
+
+### 8.6.2 pause()
+
 ## 8.7 信号集
 
 ## 8.8 获取信号的描述信息

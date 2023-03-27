@@ -260,6 +260,13 @@ unsigned int alarm(unsigned int seconds);
 
 ### 8.6.2 pause()
 
+函数原型：
+
+``` c
+#include <unistd.h>
+int pause(void);
+```
+
 ## 8.7 信号集
 
 ## 8.8 获取信号的描述信息

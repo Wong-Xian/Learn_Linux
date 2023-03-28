@@ -348,6 +348,30 @@ int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
 
 ## 8.10 阻塞等待信号sigsuspend()
 
+要解决的问题：用sigprocmask函数将某信号加入掩码，以处理特定代码段，再将该信号移除掩码，调用pause函数等待之前阻塞的信号唤醒。若有信号在移除掩码信号和调用pause函数之间发生，则会跳转到信号处理函数，再返回主函数，进入pause，有违代码本意。
+
+解决方法：将移除掩码信号和pause挂起进程这两个动作封装成一个原子操作，成为<b>系统调用</b>sigsuspend()
+
+函数原型：
+
+``` c
+#include <signal.h>
+int sigsuspend(const sigset_t *mask);
+```
+
 ## 8.11 实时信号
+
+### 8.11.1 sigpending()函数
+
+将处于等待状态的信号放入set信号集。函数原型：
+
+``` c
+#include <signal.h>
+int sigpending(sigset_t *set);
+```
+
+配合sigismember函数确定某信号是否在set信号集中，即确定某信号是否在等待信号中。
+
+### 8.11.2 发送实时信号
 
 ## 8.12 异常退出abort()函数

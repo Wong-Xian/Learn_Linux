@@ -390,3 +390,11 @@ int sigqueue(pid_t pid, int sig, const union sigval value);
 ```
 
 ## 8.12 异常退出abort()函数
+
+对于异常退出程序，则一般使用 abort()库函数，使用 abort()终止进程运行，会生成核心转储文件。
+
+``` c
+#include <stdlib.h>
+void abort(void);
+```
+

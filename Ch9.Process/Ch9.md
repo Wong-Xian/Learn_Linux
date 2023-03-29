@@ -39,6 +39,28 @@ int atexit(void (*function)(void));
 
 ### 9.1.4 进程号
 
+PID 唯一标识进程 是一个正数
+
+<b>系统调用</b>getpid()函数用于获取当前进程的PID
+
+原型：
+
+``` c
+#include <sys/types.h>
+#include <unistd.h>
+pid_t getpid(void);
+```
+
+<b>系统调用</b>getppid()函数用于获取父进程的PID
+
+原型：
+
+``` c
+#include <sys/types.h>
+#include <unistd.h>
+pid_t getppid(void);
+```
+
 ## 9.2 进程的环境变量
 
 ## 9.3 进程的内存布局

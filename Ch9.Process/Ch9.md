@@ -80,10 +80,34 @@ extern char **environ;
 ### 9.2.2 添加/删除/修改 环境变量
 
 1. putenv()
+
+``` c
+#include <stdlib.h>
+int putenv(char *string);
+```
+
+string不能是栈中分配的数组，即需要用户手动开辟内存空间。
+
 2. setenv()
+
+``` c
+#include <stdlib.h>
+int setenv(const char *name, const char *value, int overwrite);
+```
+
 3. unsetenv()
 
+``` c
+#include <stdlib.h>
+int unsetenv(const char *name);
+```
+
 ### 9.2.3 清空环境变量
+
+``` c
+#include <stdlib.h>
+int clearenv(void);
+```
 
 ### 9.2.4 环境变量的作用
 

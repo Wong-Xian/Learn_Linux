@@ -136,6 +136,11 @@ C程序的组成部分：
 
 ## 9.5 fork()创建子进程
 
+``` c
+#include <unistd.h>
+pid_t fork(void);
+```
+
 ## 9.6 父、子进程之间的文件共享
 
 ## 9.7 系统调用vfork()

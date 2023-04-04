@@ -199,6 +199,30 @@ exit()函数包括以下步骤：
 
 ## 9.10 监视子进程
 
+### 9.10.1 wait()函数
+
+系统调用 wait()可以等待进程的任一子进程终止，同时获取子进程的终止状态信息。还有一个功能，回收子进程的一些资源，俗称为子进程“收尸”。
+
+``` c
+#include <sys/types.h>
+#include <sys/wait.h>
+pid_t wait(int *status);
+```
+
+### 9.10.2 waitpid()函数
+
+``` c
+#include <sys/types.h>
+#include <sys/wait.h>
+pid_t waitpid(pid_t pid, int *status, int options);
+```
+
+### 9.10.3 waitid()函数
+
+### 9.10.4 僵尸进程 与 孤儿进程
+
+### 9.10.5 SIGCHLD信号
+
 ## 9.11 执行新程序
 
 ## 9.12 进程状态与进程关系

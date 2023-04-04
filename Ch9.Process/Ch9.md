@@ -219,11 +219,71 @@ pid_t waitpid(pid_t pid, int *status, int options);
 
 ### 9.10.3 waitid()函数
 
+略
+
 ### 9.10.4 僵尸进程 与 孤儿进程
+
+- 孤儿进程
+
+父进程比子进程先结束。孤儿进程自动变为init进程的子进程，此时其父进程pid为1。
+
+- 僵尸进程
+
+子进程结束，父进程未对其进行资源回收时，该进程称为僵尸进程。
 
 ### 9.10.5 SIGCHLD信号
 
+- 当父进程的某个子进程终止时，父进程会收到 SIGCHLD 信号
+- 当父进程的某个子进程因收到信号而停止（暂停运行）或恢复时，内核也可能向父进程发送该信号
+
+存在问题：在父进程收到SIGCHLD信号，调用信号处理函数为子进程“收尸”时，若又有子进程终止，则无法再次触发“收尸”过程。
+
+解决方法：在信号处理函数中加入如下代码段，若子进程状态发生变化，waitpid函数返回子进程PID，进入while循环，直到子进程状态无变化，waitpid函数返回0时，才离开while循环。
+
+``` c
+while (waitpid(-1, NULL, WNOHANG) > 0)
+   continue;
+```
+
 ## 9.11 执行新程序
+
+
+### 9.11.1 execve函数
+
+<b>系统调用</b>函数原型：
+
+``` c
+#include <unistd.h>
+int execve(const char *filename, char *const argv[], char *const envp[]);
+```
+
+execve 调用成功将不会返回；失败将返回-1，并设置 errno。
+
+当 newApp 程序运行完成退出后，testApp 进程就结束了。
+
+### 9.11.2 exec库函数
+
+<b>C库函数</b>函数原型：
+
+``` c
+#include <unistd.h>
+
+extern char **environ;
+
+int execl   (const char *path, const char *arg, ... /* (char *) NULL */);
+int execlp  (const char *file, const char *arg, ... /* (char *) NULL */);
+int execle  (const char *path, const char *arg, ... /*, (char *) NULL, char * const envp[] */);
+
+int execv   (const char *path, char *const argv[]);
+int execvp  (const char *file, char *const argv[]);
+int execvpe (const char *file, char *const argv[], char *const envp[]);
+```
+
+### 9.11.3 exec族函数使用示例
+
+略
+
+### 9.11.4 system函数
 
 ## 9.12 进程状态与进程关系
 

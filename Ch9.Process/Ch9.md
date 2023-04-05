@@ -285,7 +285,48 @@ int execvpe (const char *file, char *const argv[], char *const envp[]);
 
 ### 9.11.4 system函数
 
+使用 system()函数可以很方便地在我们的程序当中执行任意 shell 命令。
+
+``` c
+#include <stdlib.h>
+int system(const char *command);
+```
+
 ## 9.12 进程状态与进程关系
+
+### 9.12.1 进程状态
+
+- 就绪态（Ready）
+- 运行态
+- 僵尸态
+- 等待态
+  - 可中断睡眠状态
+  - 不可中断睡眠状态
+- 暂停态
+
+### 9.12.2 进程关系
+
+1. 无关系
+2. 父子进程关系
+3. 进程组
+
+获取进程对应的进程组的id，函数原型：
+
+``` c
+#include <unistd.h>
+pid_t getpgid(pid_t pid);
+pid_t getpgrp(void);
+```
+
+加入一个现有的进程组或创建一个新的进程组。函数原型：
+
+``` c
+#include <unistd.h>
+int setpgid(pid_t pid, pid_t pgid);
+int setpgrp(void);
+```
+
+4. 会话
 
 ## 9.13 守护进程
 

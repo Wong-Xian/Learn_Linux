@@ -82,5 +82,8 @@ int main(int argc, char *argv[])
     /* 打印结果 */
     printf("g_count = %d\n", g_count);
 
+    /* 销毁互斥锁 */
+    pthread_mutex_destroy(&mutex);
+
     exit(0);
 }

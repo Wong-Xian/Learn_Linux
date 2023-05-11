@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
     /* 将源文件中的内容复制到目标文件中 */
     memcpy(dstaddr, srcaddr, sbuf.st_size);
-
+    // 把文件映射到内存中后，对内存的读写，就相当于对文件的读写了。
 
     /* 程序退出前清理工作 */
     

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     /* 校验传参 */
     if (argc != 2)
     {
-        fprintf(stderr, "usage: %s <file>\n", srgv[0]);
+        fprintf(stderr, "usage: %s <file>\n", argv[0]);
         exit(-1);
     }
 
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
         lock.l_start = 0;
         lock.l_len = 0;
         if (fcntl(fd, F_SETLK, &lock) == -1)
-            perror("子进程：加读锁失败")；
+            perror("子进程：加读锁失败");
         else
             printf("子进程：加读锁成功\n");
 

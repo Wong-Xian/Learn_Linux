@@ -40,5 +40,9 @@ int main()
     /*open a.cpp, if it doesn't exist, create it, & set its mode as above:
     user:rwx, group:r, other:r*/
 
+    int fd6 = open ("./ln_a", O_NOFOLLOW);
+    printf ("fd6 = %d\n",fd6);
+    /* The flag O_NOFOLLOW allows function return -1 when the file to be open is a link */
+
     return 0;
 }
